@@ -16,8 +16,8 @@
 <div class="button  active" id="resources">Health care resources </div>
 </div>
 <Br/>
-<div class="topicExplanation">Having sufficient health care resources is critical to the functioning of health systems. But higher resources do not automatically translate into better health outcomes – the effectiveness of spending is also important. Health care expenditure per capita is the most immediate summary measure of health care resources. The supply of health workers (doctors and nurses) and hospital beds are also reported, since higher health spending is not always closely related to these indicators.<br/>All data refer to 2015 or nearest year, except for health care expenditure, which refers to 2016.
-</div>
+<!--<div class="topicExplanation">Having sufficient health care resources is critical to the functioning of health systems. But higher resources do not automatically translate into better health outcomes – the effectiveness of spending is also important. Health care expenditure per capita is the most immediate summary measure of health care resources. The supply of health workers (doctors and nurses) and hospital beds are also reported, since higher health spending is not always closely related to these indicators.<br/>All data refer to 2015 or nearest year, except for health care expenditure, which refers to 2016.
+</div>-->
 <Br/>
 <div class="selector">Highlight a country: 
 <select id="dropDownButton" onchange="highlightCountry(this.value)";>
@@ -208,6 +208,14 @@ test="#"+topicSelected;
 
 		var minValue = d3.min(data, function(d) { return parseFloat(d.value); });
 		var maxValue = d3.max(data, function(d) { return parseFloat(d.value); });
+
+		
+		if (topicSelected == "healthexp")
+			format = d3.format(",.0f");
+		else
+			format = d3.format(",.1f");
+
+		
 
 		if(topicSelected=="healthexp" ||  topicSelected=="doccap" ||  topicSelected=="nursecap" ||  topicSelected=="healthexpShare" )
 			x.domain([minValue,maxValue]) ;

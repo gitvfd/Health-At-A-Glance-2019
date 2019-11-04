@@ -16,8 +16,8 @@
 <div class="button  " id="resources">Health care resources </div>
 </div>
 <Br/>
-<div class="topicExplanation">Measures of the quality and outcomes of care should reflect appropriateness of care, clinical effectiveness, patient safety and the person responsiveness of care. The appropriateness of care is measured by PrimCaretics prescribed as well as asthma and chronic obstructive pulmonary disease (COPD) admissions as an indicator of avoidable admissions. 30-day mortality following acute myocardial infarction (AMI) and colon cancer survival are indicators of clinical effectiveness; obstetric trauma is a measure of patient safety.<br/>All data refer to 2015 or nearest year.
-</div>
+<!--<div class="topicExplanation">Measures of the quality and outcomes of care should reflect appropriateness of care, clinical effectiveness, patient safety and the person responsiveness of care. The appropriateness of care is measured by PrimCaretics prescribed as well as asthma and chronic obstructive pulmonary disease (COPD) admissions as an indicator of avoidable admissions. 30-day mortality following acute myocardial infarction (AMI) and colon cancer survival are indicators of clinical effectiveness; obstetric trauma is a measure of patient safety.<br/>All data refer to 2015 or nearest year.
+</div>-->
 <Br/>
 <div class="selector">Highlight a country: 
 <select id="dropDownButton" onchange="highlightCountry(this.value)";>
@@ -171,6 +171,9 @@ legend.append("text")
 .text("Bottom Performer");
 
 function createComparison(topicSelected,countrySel){
+
+
+
 test="#"+topicSelected;
 	d3.selectAll(test)
 		.selectAll("*")
@@ -207,7 +210,14 @@ test="#"+topicSelected;
 		var minValue = d3.min(data, function(d) { return parseFloat(d.value); });
 		var maxValue = d3.max(data, function(d) { return parseFloat(d.value); });
 		
-		if( topicSelected == "safePresc" || topicSelected == "PrimCare" || topicSelected == "CancerCare")
+
+		if ( topicSelected == "PrimCare")
+			format = d3.format(",.0f");
+		else
+			format = d3.format(",.1f");
+
+		
+		if(  topicSelected == "CancerCare")
 			x.domain([minValue,maxValue]) ;
 		else
 			x.domain([maxValue,minValue]) ;
@@ -263,7 +273,7 @@ test="#"+topicSelected;
 			.attr("class","label")
 			.attr("dx", function(d){
 				if(d.value!==""){
-					if(topicSelected == "safePresc" || topicSelected == "PrimCare" || topicSelected == "CancerCare" )
+					if(topicSelected == "CancerCare" )
 				    		return  x(parseFloat(d.value))-12;
 					else
 							return  12 + x(parseFloat(d.value));
@@ -272,7 +282,7 @@ test="#"+topicSelected;
 			.attr("dy",height/2)
 			.style("text-anchor",function(d){
 
-					if(topicSelected == "safePresc" || topicSelected == "PrimCare"  || topicSelected == "CancerCare" )
+					if( topicSelected == "CancerCare" )
 				    		return  "end";
 					else
 							return  "start";
@@ -287,7 +297,7 @@ test="#"+topicSelected;
 			.attr("class","label")
 			.attr("dx", function(d){
 				if(d.value!==""){
-					if(topicSelected == "safePresc" || topicSelected == "PrimCare"  || topicSelected == "CancerCare" )
+					if( topicSelected == "CancerCare" )
 				    		return  12 + x(parseFloat(d.value));
 					else
 							return  x(parseFloat(d.value))-12;
@@ -296,7 +306,7 @@ test="#"+topicSelected;
 			.attr("dy",height/2)
 			.style("text-anchor",function(d){
 
-					if(topicSelected == "safePresc" || topicSelected == "PrimCare"|| topicSelected == "CancerCare" )
+					if( topicSelected == "CancerCare" )
 				    		return  "start";
 					else
 							return  "end";
