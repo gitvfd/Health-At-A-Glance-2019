@@ -16,8 +16,8 @@
 <div class="button  " id="resources">Health care resources </div>
 </div>
 <Br/>
-<div class="topicExplanation">Life expectancy is a key indicator to understanding the overall health of a population. Three indicators reflecting gender and age-specific life expectancies are presented here. More specific indicators on ischaemic heart mortality and dementia prevalence are also shown, two major causes of mortality and morbidity today and in the future.<br/>All data refer to 2015 or nearest year, except for dementia prevalence, which refers to 2017.
-</div>
+<!--<div class="topicExplanation">Life expectancy is a key indicator to understanding the overall health of a population. Three indicators reflecting gender and age-specific life expectancies are presented here. More specific indicators on ischaemic heart mortality and dementia prevalence are also shown, two major causes of mortality and morbidity today and in the future.<br/>All data refer to 2015 or nearest year, except for dementia prevalence, which refers to 2017.
+</div>-->
 <Br/>
 <div class="selector">Highlight a country: 
 <select id="dropDownButton" onchange="highlightCountry(this.value)";>
@@ -133,9 +133,9 @@ var marginLeft=sideMargin;
 
 var marginRight=sideMargin;
 
-var formatNumber = d3.format(".0f");
+//var formatNumber = d3.format(".0f");
 
-var format= d3.format(",.1f");
+var format;//= d3.format(",.1f");
 
 
 var colorScale = d3.scaleOrdinal()
@@ -172,7 +172,8 @@ legend.append("text")
 .text("Bottom Performer");
 
 function createComparison(topicSelected,countrySel){
-test="#"+topicSelected;
+		
+	test = "#" + topicSelected;
 	d3.selectAll(test)
 		.selectAll("*")
 		.remove();
@@ -213,6 +214,10 @@ test="#"+topicSelected;
 		else
 			x.domain([maxValue,minValue]) ;
 
+		if (topicSelected == "AvMort")
+			format = d3.format(",.0f");
+		else
+			format = d3.format(",.1f");
 
 		compChart.append("line")
 			.attr("x1",x(minValue))

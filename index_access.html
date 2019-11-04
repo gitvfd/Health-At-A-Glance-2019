@@ -16,8 +16,8 @@
 <div class="button  " id="resources">Health care resources </div>
 </div>
 <Br/>
-<div class="topicExplanation">Access to care is a critical measure of health system performance. Indicators presented here include population coverage, an overall measure of health care coverage, alongside indicators reflecting financial and timely access.<br/>Data on population coverage, share of OOP and waiting times refer to 2015 or nearest year; consultations skipped due to cost refer to 2016 or nearest year.
-</div>
+<!--<div class="topicExplanation">Access to care is a critical measure of health system performance. Indicators presented here include population coverage, an overall measure of health care coverage, alongside indicators reflecting financial and timely access.<br/>Data on population coverage, share of OOP and waiting times refer to 2015 or nearest year; consultations skipped due to cost refer to 2016 or nearest year.
+</div>-->
 <Br/>
 <div class="selector">Highlight a country: 
 <select id="dropDownButton" onchange="highlightCountry(this.value)";>
@@ -210,6 +210,12 @@ test="#"+topicSelected;
 			x.domain([minValue,maxValue]) ;
 		else
 			x.domain([maxValue,minValue]) ;
+
+
+		if (topicSelected == "popcover" ||  topicSelected == "PrimSerCov" || topicSelected == "PrevSerCov" )
+			format = d3.format(",.0f");
+		else
+			format = d3.format(",.1f");
 
 
 		compChart.append("line")
